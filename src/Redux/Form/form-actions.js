@@ -1,5 +1,6 @@
 import actionType from './action-type';
-//----------------------------------------
+
+//------------------------------------------------------------------------
 
 export const onName = (value) => ({
   type: actionType.addName,
@@ -17,5 +18,9 @@ export const onAddContact = (value) => ({
 });
 export const onDellContact = (value) => ({
   type: actionType.contactDelite,
+  payload: value,
+});
+export const filt = (value) => ({
+  type: actionType.filt,
   payload: value,
 });

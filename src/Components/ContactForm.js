@@ -74,7 +74,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onName: (e) => dispatch(actions.onName(e.target?.value ?? e)),
     onNumber: (e) => dispatch(actions.onNumber(e.target?.value ?? e)),
