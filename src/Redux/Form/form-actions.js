@@ -1,26 +1,11 @@
-import actionType from './action-type';
+import { createAction } from '@reduxjs/toolkit';
 
 //------------------------------------------------------------------------
 
-export const onName = (value) => ({
-  type: actionType.addName,
-  payload: value,
-});
+//------------------------------------------------------------------------
 
-export const onNumber = (value) => ({
-  type: actionType.addNumber,
-  payload: value,
-});
-
-export const onAddContact = (value) => ({
-  type: actionType.addContact,
-  payload: value,
-});
-export const onDellContact = (value) => ({
-  type: actionType.contactDelite,
-  payload: value,
-});
-export const filt = (value) => ({
-  type: actionType.filt,
-  payload: value,
-});
+export const onName = createAction('ContactForm/Name');
+export const onNumber = createAction('ContactForm/Number');
+export const onAddContact = createAction('ContactForm/Contact');
+export const onDellContact = createAction('ContactForm/ContactDelite');
+export const filt = createAction('ContactForm/filt');

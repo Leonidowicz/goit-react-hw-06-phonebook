@@ -1,27 +1,25 @@
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../Redux/Form/form-actions';
 
 //------------------------------------------------------------------------
 
-const Filter = ({ filter, filt }) => {
+const Filter = () => {
+  const filter = useSelector((state) => state.filt);
+  const dispatch = useDispatch();
+
   return (
     <label>
       Find phone number by name
-      <input name="filter" type="text" value={filter} onChange={filt} />
+      <input
+        name="filter"
+        type="text"
+        value={filter}
+        onChange={(e) => dispatch(actions.filt(e.target.value))}
+      />
     </label>
   );
 };
 
 //------------------------------------------------------------------------
 
-const mapStateToProps = (state) => ({ filter: state.filt });
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    filt: (e) => dispatch(actions.filt(e.target.value)),
-  };
-};
-
-//--------------------------------------------------------------------------
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;

@@ -1,4 +1,13 @@
+import { createReducer } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
+
+import {
+  onName,
+  onNumber,
+  onAddContact,
+  onDellContact,
+  filt,
+} from './form-actions';
 
 //------------------------------------------------------------------------
 
@@ -13,41 +22,20 @@ const initStateContacts = [
 
 //------------------------------------------------------------------------
 
-const nameReducer = (state = initStateName, { type, payload }) => {
-  switch (type) {
-    case 'ContactForm/Name':
-      return payload;
-    default:
-      return state;
-  }
-};
-const numberReducer = (state = initStateNumber, { type, payload }) => {
-  switch (type) {
-    case 'ContactForm/Number':
-      return payload;
-    default:
-      return state;
-  }
-};
-const contactsReducer = (state = initStateContacts, { type, payload }) => {
-  switch (type) {
-    case 'ContactForm/Contact':
-      return [...state, payload];
-    case 'ContactForm/ContactDelite':
-      return state.filter(({ id }) => id !== payload);
-
-    default:
-      return state;
-  }
-};
-const filtReducer = (state = '', { type, payload }) => {
-  switch (type) {
-    case 'ContactForm/filt':
-      return payload;
-    default:
-      return state;
-  }
-};
+const nameReducer = createReducer(initStateName, {
+  [onName]: (_, { payload }) => payload,
+});
+const numberReducer = createReducer(initStateNumber, {
+  [onNumber]: (_, { payload }) => payload,
+});
+const contactsReducer = createReducer(initStateContacts, {
+  [onAddContact]: (state, { payload }) => [...state, payload],
+  [onDellContact]: (state, { payload }) =>
+    state.filter(({ id }) => id !== payload),
+});
+const filtReducer = createReducer('', {
+  [filt]: (_, { payload }) => payload,
+});
 
 //------------------------------------------------------------------------
 

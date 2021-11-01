@@ -1,22 +1,5 @@
-import { connect } from 'react-redux';
 import * as actions from '../Redux/Form/form-actions';
-
-//------------------------------------------------------------------------
-
-const ContactList = ({ filteredContacts, onDellContact }) => {
-  return (
-    <ul>
-      {filteredContacts.map(({ id, name, number }) => (
-        <li key={id}>
-          {name}: {number}
-          <button type="button" onClick={() => onDellContact(id)}>
-            Delete
-          </button>
-        </li>
-      ))}
-    </ul>
-  );
-};
+import { useSelector, useDispatch } from 'react-redux';
 
 //------------------------------------------------------------------------
 
@@ -28,17 +11,28 @@ const filteredContacts = (items, filter) => {
 
 //------------------------------------------------------------------------
 
-const mapStateToProps = ({ filt, contacts }) => ({
-  contacts,
-  filteredContacts: filteredContacts(contacts, filt),
-});
+const ContactList = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector((state) => state.contacts);
+  const filt = useSelector((state) => state.filt);
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onDellContact: (value) => dispatch(actions.onDellContact(value)),
-  };
+  return (
+    <ul>
+      {filteredContacts(contacts, filt).map(({ id, name, number }) => (
+        <li key={id}>
+          {name}: {number}
+          <button
+            type="button"
+            onClick={() => dispatch(actions.onDellContact(id))}
+          >
+            Delete contact: {name}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
 };
 
 //------------------------------------------------------------------------
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+export default ContactList;
